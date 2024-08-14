@@ -8,6 +8,20 @@ const server = http.createServer((req, res) => {
     res.write("hello there");
     res.end();
   }
+  if (req.url === "/api/numbers") {
+    res.write(JSON.stringify([1, 2, 3]));
+    res.end();
+  }
+});
+
+server.on("request", (req, res) => {
+  console.log("----- HEADERS -----");
+  console.log(req.headers);
+  console.log("----- BODY -----");
+  req.on("data", (chunk) => {
+    console.log(chunk.toString("utf-8"));
+  });
+  res.end();
 });
 
 server.listen(3000, () => {
