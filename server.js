@@ -10,10 +10,15 @@ const server = http.createServer((req, res) => {
     res.end("<h1>HI</h1>");
   }
   if (req.url === "/html") {
-    fs.readFile(__dirname + "/index.html").then((content) => {
-      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-      res.end(content);
-    });
+    fs.readFile(__dirname + "/index.html")
+      .then((content) => {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(content);
+      })
+      .catch((err) => {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.end("Internal Server Error");
+      });
   }
 
   if (req.url === "/api/numbers") {
