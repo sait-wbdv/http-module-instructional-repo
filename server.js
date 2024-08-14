@@ -29,7 +29,7 @@ const server = http.createServer(async (req, res) => {
   else {
     try {
       const data = await fs.readFile(__dirname + "/404.html");
-      res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+      res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
       res.end(data);
     } catch (err) {
       // for if there is no 404 page
